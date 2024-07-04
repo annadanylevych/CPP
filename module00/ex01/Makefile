@@ -1,8 +1,8 @@
-NAME = megaphone
+NAME = phonebook
 
 FLAGS = -std=c++98 -Wall -Wextra -Werror
 
-SRCS = megaphone.cpp
+SRCS = phonebook.cpp
 
 TMP_DIR = tmp/
 
