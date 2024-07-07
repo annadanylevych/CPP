@@ -1,5 +1,5 @@
-#ifndef PHONEBOOK_HPP
-#define PHONEBOOK_HPP
+#ifndef CONTACT_HPP
+#define CONTACT_HPP
 
 # include <iostream>
 # include <iomanip>
@@ -9,28 +9,30 @@
 class   Contact
 {
     private:
+
         std::string number;
-        std::string firsName;
+        std::string firstName;
         std::string lastName;
         std::string nickName;
         std::string secret;
-    public:
-        Contact()
-        {
-            number = NULL;
-            firsName = NULL;
-            lastName = NULL;
-            nickName = NULL;
-            secret = NULL;
-        }
-        
+        bool    active;
 
-
-}
-
-class   PhoneBook
-{
     public:
 
+        Contact();
+        bool    getBool();
+        bool    activate();
+        void    setLastName(std::string &str);
+        void    setNumber(std::string &str);
+        void    setNickName(std::string &str);
+        void    setSecret(std::string &str);
+        void    setFirstName(std::string &str);
 
+        const   std::string& getFirstName() const;
+        const   std::string& getLastName() const;
+        const   std::string& getNumber() const;
+        const   std::string& getNickName() const;
+        const   std::string& getSecret() const;
 }
+
+#endif 

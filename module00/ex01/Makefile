@@ -12,6 +12,8 @@ DEPS = $(OBJS:.o=.d)
 
 DFLAGS = -MMD -MP
 
+HEADER = Contact.hpp, PhoneBook.hpp
+
 all: $(TMP_DIR) $(NAME)
 
 $(NAME): $(OBJS)
@@ -20,7 +22,7 @@ $(NAME): $(OBJS)
 $(TMP_DIR):
 	@mkdir -p $(TMP_DIR)
 
-$(TMP_DIR)%.o:%.cpp Makefile
+$(TMP_DIR)%.o:%.cpp $(HEADER) Makefile
 	c++ $(FLAGS) $(DFLAGS) -c $< -o $@
 
 clean:
