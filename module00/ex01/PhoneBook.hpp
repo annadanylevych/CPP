@@ -1,5 +1,5 @@
-#ifndef PHONEBOOK_HPP
-#define PHONEBOOK_HPP
+#pragma once
+
 #include "Contact.hpp"
 
 # include <iostream>
@@ -9,14 +9,12 @@
 class   PhoneBook
 {
     public:
-
+        PhoneBook();
         void    searchContact();
         void    addContact();
-        void    isActive(Contact x);
         
     private:
+        int     size;
         Contact smbd[8];
-}
-
-#endif
+};
 

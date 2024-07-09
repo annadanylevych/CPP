@@ -2,7 +2,7 @@ NAME = phonebook
 
 FLAGS = -std=c++98 -Wall -Wextra -Werror
 
-SRCS = phonebook.cpp
+SRCS = PhoneBook.cpp Contact.cpp main.cpp
 
 TMP_DIR = tmp/
 
@@ -12,8 +12,6 @@ DEPS = $(OBJS:.o=.d)
 
 DFLAGS = -MMD -MP
 
-HEADER = Contact.hpp, PhoneBook.hpp
-
 all: $(TMP_DIR) $(NAME)
 
 $(NAME): $(OBJS)
@@ -22,7 +20,7 @@ $(NAME): $(OBJS)
 $(TMP_DIR):
 	@mkdir -p $(TMP_DIR)
 
-$(TMP_DIR)%.o:%.cpp $(HEADER) Makefile
+$(TMP_DIR)%.o:%.cpp Makefile
 	c++ $(FLAGS) $(DFLAGS) -c $< -o $@
 
 clean:

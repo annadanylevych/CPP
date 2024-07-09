@@ -1,7 +1,7 @@
 #include "Contact.hpp"
-#include "PhoneBook.hpp"
+#include <iostream>
 
-Contact::Contact() : active(false){}
+Contact::Contact() : number(""), firstName(""), lastName(""), nickName(""), secret(""), active(false){}
 
 bool    Contact::getBool()
 {

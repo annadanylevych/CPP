@@ -1,5 +1,4 @@
-#ifndef CONTACT_HPP
-#define CONTACT_HPP
+# pragma once
 
 # include <iostream>
 # include <iomanip>
@@ -33,6 +32,4 @@ class   Contact
         const   std::string& getNumber() const;
         const   std::string& getNickName() const;
         const   std::string& getSecret() const;
-}
-
-#endif 
+};
