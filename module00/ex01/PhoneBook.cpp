@@ -25,8 +25,8 @@ bool    whiteSpace(std::string& str)
 
 void    PhoneBook::searchContact()
 {
-    if (smbd[0].getBool() == false)
-        std::cout << "There are no contacts yet" << std::endl;
+    if (this->smbd[0].getBool() == false)
+        std::cout << YELLOW "There are no contacts yet" RESET << std::endl;
 }
 
 void    PhoneBook::addContact()
