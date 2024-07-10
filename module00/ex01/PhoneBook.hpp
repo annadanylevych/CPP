@@ -14,7 +14,6 @@ class   PhoneBook
         void    addContact();
         
     private:
-        int     size;
         Contact smbd[8];
 };
 

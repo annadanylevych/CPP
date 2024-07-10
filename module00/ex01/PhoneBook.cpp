@@ -3,12 +3,13 @@
 #include "Colours.hpp"
 #include <iostream>
 
-PhoneBook::PhoneBook() : size(0) {}
+PhoneBook::PhoneBook()
+{}
 
 void    PhoneBook::searchContact()
 {
-    if (this->size == 0)
-        std::cout << "There are no contacts yet" << std::endl;
+    if (this->smbd[0].getBool() == false)
+        std::cout << YELLOW "There are no contacts yet" RESET << std::endl;
 }
 
 void    PhoneBook::addContact()

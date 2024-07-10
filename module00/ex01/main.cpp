@@ -24,8 +24,8 @@ int main(int argc, char **argv)
     std::cin >> choice;
     if (choice == "ADD")
         book.addContact();
-    //else if (choice == "SEARCH")
-    //    book.searchContact();
+    else if (choice == "SEARCH")
+        book.searchContact();
 //    else if (choice == "EXIT")
 
 }
