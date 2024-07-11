@@ -21,8 +21,8 @@ int main(int argc, char **argv)
     {
         if (choice == "ADD")
             book.addContact();
-        //else if (choice == "SEARCH")
-        //    book.searchContact();
+        else if (choice == "SEARCH")
+            book.searchContact();
     //       else if (choice == "EXIT")
 
         std::cout << GREEN "Would you like to: " RESET << std::endl;

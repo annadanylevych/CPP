@@ -12,6 +12,7 @@ class   PhoneBook
         PhoneBook();
         void    searchContact();
         void    addContact();
+        void    printi(int i);
         
     private:
         Contact smbd[8];
