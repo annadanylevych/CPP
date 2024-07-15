@@ -23,8 +23,8 @@ int main(int argc, char **argv)
             book.addContact();
         else if (choice == "SEARCH")
             book.searchContact();
-    //       else if (choice == "EXIT")
-
+        else if (choice == "EXIT")
+            exit(0);
         std::cout << GREEN "Would you like to: " RESET << std::endl;
         std::cout << BLUE "   -ADD" RESET YELLOW " new contact" RESET << std::endl;
         std::cout << MAGENTA "   -SEARCH" RESET YELLOW " for a contact" RESET << std::endl;

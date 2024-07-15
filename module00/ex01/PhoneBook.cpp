@@ -6,7 +6,7 @@
 #include <cstdlib> 
 #include <iomanip>
 
-PhoneBook::PhoneBook()
+PhoneBook::PhoneBook():qtt(0)
 {}
 
 bool     checkNum(std::string& str)
@@ -19,15 +19,35 @@ bool     checkNum(std::string& str)
     return (true);
 }
 
-void    Phonebook::printi(int i)
+void    PhoneBook::printi(int i)
 {
-    int y = 0;
-    if(smbd[i].length() > 10)
+    if (smbd[i].getFirstName().length() > 10)
         std::cout << CYAN << smbd[i].getFirstName().substr(0, 9) << ".|" << RESET;
     else
     {
         std::cout << CYAN << smbd[i].getFirstName() << RESET;
-        while()
+        for (int y = smbd[i].getFirstName().length(); y < 10; y++)
+            std::cout << " ";
+        std::cout << CYAN "|" RESET;
+    }
+    if (smbd[i].getLastName().length() > 10)
+        std::cout << CYAN << smbd[i].getLastName().substr(0, 9) << ".|" << RESET;
+    else
+    {
+        std::cout << CYAN << smbd[i].getLastName() << RESET;
+        for (int y = smbd[i].getLastName().length(); y < 10; y++)
+            std::cout << " ";
+        std::cout << CYAN "|" RESET;
+    }
+    if (smbd[i].getNickName().length() > 10)
+        std::cout << CYAN << smbd[i].getNickName().substr(0, 9) << ".|" << RESET;
+    else
+    {
+        std::cout << CYAN << smbd[i].getNickName() << RESET;
+        for (int y = smbd[i].getNickName().length(); y < 10; y++)
+            std::cout << " ";
+         std::cout << std::endl;
+    }
 
 }
 
@@ -46,35 +66,48 @@ int    whiteSpace(std::string& str)
 void    PhoneBook::searchContact()
 {
     int i = 0;
+    int numi;
+
+    std::string num;
 
     if (smbd[0].getBool() == false)
         std::cout << YELLOW "There are no contacts yet" RESET << std::endl;
     else
     {
-        while(smbd[i++].getBool() == true)
+        std::cout << GREEN BOLD "I N D E X |FIRST name|LAST name |NICK name " RESET << std::endl;
+        while(smbd[i].getBool() == true)
         {
-            std::cout << GREEN BOLD "I N D E X |FIRST name|LAST name |NICK name " RESET << std::endl;
-            std::cout << CYAN << i << "         |" RESET;
-            std::cout << CYAN << smbd[0].getLastName().substr(0, 9) << ".|" << RESET;
-            std::cout << CYAN << smbd[0].getNickName().substr(0, 9) << ".|" << RESET;
-            std::cout << CYAN << smbd[0].getSecret().substr(0, 9) << ".|" << RESET << std::endl;
+            std::cout << CYAN << i + 1 << "         |" RESET;
+            printi(i);
+            i++;
         }
-    }
+        std::cout << YELLOW BOLD "Please enter the index of the contact: " RESET << std::endl;
+        getline(std::cin, num);
+        if(std::cin.eof())
+            exit(1);
+        numi = std::atoi(num.c_str());
+        while (numi > 8 || numi < 1 || smbd[numi - 1].getBool() == false)
+        {
+            std::cout << RED BOLD "Please enter the existing index: " RESET << std::endl;
+            getline(std::cin, num);
+            if(std::cin.eof())
+                exit(1);
+            numi = std::atoi(num.c_str());
+        }
+        std::cout << CYAN "First name: " << smbd[numi - 1].getFirstName() << RESET << std::endl;
+        std::cout << CYAN "Last name: " << smbd[numi - 1].getLastName() << RESET << std::endl;
+        std::cout << CYAN "Nick name: " << smbd[numi - 1].getNickName() << RESET << std::endl;
+        std::cout << CYAN "Number: " << smbd[numi - 1].getNumber() << RESET << std::endl;
+        std::cout << CYAN "Darkest secret: " << smbd[numi - 1].getSecret() << RESET << std::endl;
+    }   
 }
 
 void    PhoneBook::addContact()
 {
     std::string info;
     
-    int i;
+    int i = qtt % 8;
 
-    std::cout << info[0] << std::endl;
-
-    for(i = 0; i < 9; i++)
-    {
-        if (smbd[i].getBool() == false)
-            break;
-    }
     std::cout << MAGENTA "Enter first name: " RESET;
     getline(std::cin, info);
     if(std::cin.eof())
@@ -137,4 +170,6 @@ void    PhoneBook::addContact()
     smbd[i].setSecret(info);
     smbd[i].activate();
     std::cout << GREEN BOLD "CONGRATULATIONS! CONTACT ADDED SUCCESSFULLY!" RESET << std::endl;
+    qtt++;
 }
+

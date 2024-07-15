@@ -16,5 +16,6 @@ class   PhoneBook
         
     private:
         Contact smbd[8];
+        int     qtt;
 };
 
