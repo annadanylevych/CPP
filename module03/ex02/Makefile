@@ -1,8 +1,8 @@
-NAME = zombie
+NAME = FragTrap
 
 FLAGS = -std=c++98 -Wall -Wextra -Werror
 
-SRCS = Zombie.cpp zombieHorde.cpp main.cpp
+SRCS = ClapTrap.cpp ScavTrap.cpp main.cpp FragTrap.cpp
 
 TMP_DIR = tmp/
 

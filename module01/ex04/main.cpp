@@ -11,7 +11,7 @@ int main(int argc, char **argv)
     }
     std::string s1 = argv[2];
     std::string s2 = argv[3];
-    if(s1.empty() || s1.empty())
+    if(s1.empty() || s2.empty())
     {
         std::cerr << "Strings should not be empty!😡";
         return (1);
@@ -38,7 +38,7 @@ int main(int argc, char **argv)
             if (start == std::string::npos)
                 break;
             res += line.substr(pos, start - pos);
-            res +=s2;
+            res += s2;
             pos = start + s1.length();
         }
         res += line.substr(pos);

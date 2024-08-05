@@ -1,8 +1,8 @@
-NAME = zombie
+NAME = violence
 
 FLAGS = -std=c++98 -Wall -Wextra -Werror
 
-SRCS = Zombie.cpp zombieHorde.cpp main.cpp
+SRCS = main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
 
 TMP_DIR = tmp/
 
