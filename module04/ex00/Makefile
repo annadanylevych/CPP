@@ -2,9 +2,9 @@ NAME = poly
 
 FLAGS = -std=c++98 -Wall -Wextra -Werror
 
-SRCS = main.cpp 
+SRCS = main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
 
-OBJS = $(addprefix $(TMP_DIR) $(SRCS:.cpp=.o))
+OBJS = $(addprefix $(TMP_DIR), $(SRCS:.cpp=.o))
 
 TMP_DIR = tmp/
 
