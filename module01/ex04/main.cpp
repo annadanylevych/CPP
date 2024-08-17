@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <cstdlib>
 
 int main(int argc, char **argv)
 {
@@ -17,7 +18,7 @@ int main(int argc, char **argv)
         return (1);
     }
     std::ifstream file(argv[1]);
-    std::ofstream newFile(std::string(argv[1]) + ".replace");
+    std::ofstream newFile((std::string(argv[1]) + ".replace").c_str());
     if (!file.is_open())
     {
         std::cerr << "Error opening the file." <<std::endl;
