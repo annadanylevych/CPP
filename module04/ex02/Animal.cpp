@@ -12,7 +12,7 @@ Animal::Animal(std::string type): type(type)
 
 Animal::~Animal()
 {
-    std::cout << "Animal " << type << " destroyed." << std::endl;
+    std::cout << "Animal " << type << "destroyed." << std::endl;
 }
 
 Animal::Animal(const Animal& another)

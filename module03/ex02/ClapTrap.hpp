@@ -11,10 +11,10 @@ protected:
 public:
     ClapTrap(std::string name);
     ClapTrap();
-    ~ClapTrap();
+    virtual ~ClapTrap();
     ClapTrap(const ClapTrap& another);
     ClapTrap& operator=(ClapTrap& another);
-    void attack(const std::string& target);
+    void virtual attack(const std::string& target);
     void takeDamage(unsigned int amount);
     void beRepaired(unsigned int amount);
 };

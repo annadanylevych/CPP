@@ -42,7 +42,7 @@ Fixed::Fixed(const int integer)
 
 Fixed::Fixed(const float floating)
 {
-    this->setRawBits(std::roundf(floating *(1 << fracBits)));
+    this->setRawBits(roundf(floating *(1 << fracBits)));
 	std::cout << "Float constructor called" << std::endl;
 }
 
