@@ -1,11 +1,11 @@
+#pragma once
+
 #include <string>
 #include <iostream>
 #include "AMateria.hpp"
 
 class ICharacter
 {
-    protected:
-        std::string name;
     public:
         virtual ~ICharacter() {}
         virtual std::string const & getName() const = 0;
