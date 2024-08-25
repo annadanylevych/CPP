@@ -2,7 +2,7 @@ NAME = materia
 
 FLAGS = -std=c++98 -Wall -Wextra -Werror
 
-SRCS = 
+SRCS = AMateria.cpp Character.cpp Cure.cpp Ice.cpp MateriaSource.cpp main.cpp
 
 OBJS = $(addprefix $(TMP_DIR), $(SRCS:.cpp=.o))
 
