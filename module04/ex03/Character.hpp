@@ -9,7 +9,6 @@ class Character : public ICharacter
     protected:
         std::string name;
         AMateria*   inv[4];
-        AMateria*   dropped[4];
     public:
         Character();
         Character(std::string name);
