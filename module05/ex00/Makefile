@@ -1,8 +1,8 @@
-NAME = materia
+NAME = poly
 
 FLAGS = -std=c++98 -Wall -Wextra -Werror
 
-SRCS = AMateria.cpp Character.cpp Cure.cpp Ice.cpp MateriaSource.cpp main.cpp
+SRCS = main.cpp 
 
 OBJS = $(addprefix $(TMP_DIR), $(SRCS:.cpp=.o))
 
