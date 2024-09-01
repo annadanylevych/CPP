@@ -1,8 +1,8 @@
-NAME = poly
+NAME = buro
 
 FLAGS = -std=c++98 -Wall -Wextra -Werror
 
-SRCS = main.cpp 
+SRCS = main.cpp Bureaucrat.cpp
 
 OBJS = $(addprefix $(TMP_DIR), $(SRCS:.cpp=.o))
 
