@@ -2,22 +2,18 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "Intern.hpp"
 
 int main()
 {
     try
     {
-        ShrubberyCreationForm l;
-        Bureaucrat k("k", 14);
-        RobotomyRequestForm r;
-        PresidentialPardonForm p;
-
-        k.signForm(l);
-        k.executeForm(l);
-        k.signForm(r);
-        k.executeForm(r);
-        k.signForm(p);
-        k.executeForm(p);
+        Intern someRandomIntern;
+        Bureaucrat  buro("buro", 4);
+        AForm* rrf;
+        rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+        buro.signForm(*rrf);
+        buro.executeForm(*rrf);
     }
     catch(const std::exception& e)
     {

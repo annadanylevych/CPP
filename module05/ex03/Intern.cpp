@@ -4,10 +4,14 @@ Intern::Intern() {}
 
 Intern:: ~Intern() {}
 
-Intern::Intern(const Intern& another) {}
+Intern::Intern(const Intern& another) 
+{
+    *this = another;
+}
 
 Intern& Intern::operator=(const Intern& another)
 {
+    (void)another;
     return (*this);
 }
 
@@ -34,6 +38,5 @@ AForm*  Intern::makeForm(std::string form, std::string target)
         std::cout << "Please enter a valid form" << std::endl;
         break;
     }
-    delete res;
     return (NULL);
 }
