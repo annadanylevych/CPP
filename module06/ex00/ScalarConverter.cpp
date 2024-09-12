@@ -36,6 +36,7 @@ bool    isInt(std::string& s)
             return (false);
         i++;
     }
+    if (s.compare(""))
     return (true);
 }
 

@@ -8,7 +8,7 @@ int main()
     try
     {
         ShrubberyCreationForm l;
-        Bureaucrat k("k", 14);
+        Bureaucrat k("k", 140);
         RobotomyRequestForm r;
         PresidentialPardonForm p;
 

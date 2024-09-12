@@ -63,7 +63,7 @@ void    Bureaucrat::signForm(AForm& f)
     try
     {
         f.beSigned(*this);
-        std::cout << "Bureaucrat " << name << " signed form " << f.getName() << std::endl;
+        std::cout << "Bureaucrat " << this->getName() << " signed form " << f.getName() << std::endl;
 
     }
     catch(GradeTooLowException& e)
