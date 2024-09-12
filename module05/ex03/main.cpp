@@ -14,6 +14,7 @@ int main()
         rrf = someRandomIntern.makeForm("robotomy request", "Bender");
         buro.signForm(*rrf);
         buro.executeForm(*rrf);
+        delete rrf;
     }
     catch(const std::exception& e)
     {
