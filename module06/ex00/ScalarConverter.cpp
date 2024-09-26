@@ -23,19 +23,10 @@ bool    isChar(std::string& s)
 
 bool    isInt(std::string& s)
 {
-    int i = 0;
-    if (s.empty())
-        return (false);
-    if (s.at(i) == '-' || s.at(i) == '+')
-        i++;
-    if (i == s.length())
-        return (false);
-    while (i < s.length())
-    {
-        if (!isdigit(s.at(i)))
-            return (false);
-        i++;
-    }
+    long    num;
+    char    *endpoint;
+    num = std::strtol(s.c_str(), &endpoint, 10);
+
     return (true);
 }
 
