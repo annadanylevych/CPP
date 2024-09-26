@@ -36,7 +36,6 @@ bool    isInt(std::string& s)
             return (false);
         i++;
     }
-    if (s.compare(""))
     return (true);
 }
 
@@ -114,7 +113,7 @@ void    getType(std::string& s)
 void ScalarConverter::convert(std::string& s)
 {
 
-}*/
+}
 
 
 
