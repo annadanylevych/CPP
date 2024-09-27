@@ -2,11 +2,11 @@
 
 #include <string>
 #include <iostream>
+#include <limits>
 
 class ScalarConverter
 {
     private:
-        char    type;
         ScalarConverter();
         ~ScalarConverter();
         ScalarConverter(const ScalarConverter& another);

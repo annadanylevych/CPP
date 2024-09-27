@@ -24,10 +24,12 @@ bool    isChar(std::string& s)
 bool    isInt(std::string& s)
 {
     long    num;
+    const char    *str = s.c_str();
     char    *endpoint;
-    num = std::strtol(s.c_str(), &endpoint, 10);
-
-    return (true);
+    num = std::strtol(str, &endpoint, 10);
+    if (*endpoint == '\0' && num >= std::numeric_limits<int>::min() && num <= std::numeric_limits<int>::max())
+        return (true);
+    return (false);
 }
 
 bool    isDouble(std::string& s)
@@ -96,13 +98,31 @@ bool isFloat(std::string& s)
 }
 
 
-void    getType(std::string& s)
+char    getType(std::string& s)
 {
-    
+    if (isInt(s))
+        return ('i');
+    else if (isFloat(s)) 
+        return ('f');
+    else if (isDouble(s))
+        return ('d');
+    else if (isChar(s))
+        return ('c');
 }
 
 void ScalarConverter::convert(std::string& s)
 {
+    if (getType(s) == 'c')
+    {
+        if (isprint(static_cast<int>(s[0])))
+            std::cout << "char: " << static_cast<char>(s.at(0)) << std::endl;
+        else
+            std::cout << "char: Non displayable" << std::endl;
+        std::cout << "int: " << static_cast<int>(s.at(0)) << std::endl;
+        std::cout << "float: " << static_cast<float>(s.at(0)) << std::endl;
+        std::cout << "double: " << static_cast<double>(s.at(0)) << std::endl;
+    }    
+
 
 }
 
