@@ -1,8 +1,8 @@
-NAME = buro
+NAME = convert
 
 FLAGS = -std=c++98 -Wall -Wextra -Werror -fsanitize=address
 
-SRCS = main.cpp
+SRCS = main.cpp ScalarConverter.cpp
 
 OBJS = $(addprefix $(TMP_DIR), $(SRCS:.cpp=.o))
 

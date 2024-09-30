@@ -3,6 +3,8 @@
 #include <string>
 #include <iostream>
 #include <limits>
+#include <cstdlib>
+#include <cmath>
 
 class ScalarConverter
 {
@@ -12,5 +14,5 @@ class ScalarConverter
         ScalarConverter(const ScalarConverter& another);
         ScalarConverter& operator=(const ScalarConverter& another);
     public:
-        static void convert(std::string& s);
+        static void convert(const std::string& s);
 };
