@@ -5,6 +5,9 @@
 #include <limits>
 #include <cstdlib>
 #include <cmath>
+#include <iomanip>
+
+const float FLOAT_MIN = -3.40282347e+38F;
 
 class ScalarConverter
 {
