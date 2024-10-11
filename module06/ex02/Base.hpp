@@ -1,17 +1,19 @@
 #pragma once
 
 #include <iostream>
-#include <string>
+#include <cstdlib>
+#include <ctime>
+#include "class.hpp"
 
 class Base
 {
-    private:
     public:
-        Base();
-        Base(const Base& another);
-        Base& operator=(const Base& another);
         ~Base();
-        Base* generate(void);
-        void identify(Base* p);
-        void identify(Base& p);
 };
+
+Base* generate(void);
+
+void identify(Base* p);
+
+void identify(Base& p);
+
