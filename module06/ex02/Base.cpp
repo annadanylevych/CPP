@@ -18,3 +18,8 @@ Base* generate(void)
             return nullptr;
     }
 }
+
+void    identify(Base *p)
+{
+    if (dynamic_cast<A>(&p))
+}
