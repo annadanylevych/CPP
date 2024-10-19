@@ -2,7 +2,13 @@
 
 #include <string>
 #include <iostream>
-#include "Data.hpp"
+#include <stdint.h>
+
+typedef struct Data
+{
+        std::string str;
+        int i;
+}   Data;
 
 class Serializer
 {

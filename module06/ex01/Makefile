@@ -2,7 +2,7 @@ NAME = serialize
 
 FLAGS = -std=c++98 -Wall -Wextra -Werror -fsanitize=address
 
-SRCS = main.cpp Serializer.cpp Data.cpp
+SRCS = main.cpp Serializer.cpp
 
 OBJS = $(addprefix $(TMP_DIR), $(SRCS:.cpp=.o))
 
