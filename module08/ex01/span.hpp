@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include <vector>
+#include <limits.h>
+#include <algorithm>
 
 class Span
 {
@@ -14,5 +16,7 @@ class Span
         Span(const Span& another);
         Span& operator=(const Span& another);
         ~Span();
-        void addNumber();
+        void addNumber(int i);
+        int shortestSpan();
+        int longestSpan();
 };
