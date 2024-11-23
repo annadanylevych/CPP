@@ -10,7 +10,7 @@ Span&   Span::operator=(const Span& another)
     if (this != &another)
     {
         this->N = another.N;
-        for (int i = 0; i < N; i++)
+        for (unsigned int i = 0; i < N; i++)
             this->vec[i] = another.vec[i];
     }
     return(*this);
@@ -19,7 +19,7 @@ Span&   Span::operator=(const Span& another)
 Span::Span(const Span& another)
 {
     this->N = another.N;
-    for (int i = 0; i < N; i++)
+    for (unsigned int i = 0; i < N; i++)
         this->vec[i] = another.vec[i];
 }
 
@@ -45,10 +45,8 @@ int     Span::shortestSpan()
         itit = it + 1;
         while (itit != vec.end())
         {
-            if (it > itit)
-                res = *it - *itit;
-            else
-                res = *itit - *it;
+            res = *it - *itit;
+            if (res < 0) res = -res;
             if (defres > res)
                 defres = res;
             itit++;
