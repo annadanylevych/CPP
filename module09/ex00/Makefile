@@ -1,12 +1,12 @@
-NAME = span
+NAME = btc
 
-FLAGS = -std=c++98 -Wall -Wextra -Werror -fsanitize=address
+FLAGS = -std=c++98 -Wall -Wextra -Werror
 
-SRCS = main.cpp span.cpp
-
-OBJS = $(addprefix $(TMP_DIR), $(SRCS:.cpp=.o))
+SRCS = main.cpp BitcoinExchange.cpp
 
 TMP_DIR = tmp/
+
+OBJS = $(addprefix $(TMP_DIR), $(SRCS:.cpp=.o))
 
 DEPS = $(OBJS:.o=.d)
 

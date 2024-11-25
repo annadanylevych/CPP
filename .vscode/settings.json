@@ -83,6 +83,8 @@
         "stop_token": "cpp",
         "thread": "cpp",
         "typeindex": "cpp",
-        "semaphore": "cpp"
+        "semaphore": "cpp",
+        "*.tpp": "cpp",
+        "span": "cpp"
     }
 }
