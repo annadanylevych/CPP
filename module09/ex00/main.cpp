@@ -3,10 +3,7 @@
 int main(int argc, char **argv)
 {
     if (argc != 2)
-    {
-        std::cerr << "Only 1 argument allowed" << std::endl;
-        return(1);
-    }
+        throw (std::out_of_range("Only 1 argument allowed"));
     
     std::string filename = argv[1];
     std::ifstream input(filename)
