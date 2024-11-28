@@ -6,6 +6,10 @@
 #include <ctime>
 #include <map>
 #include <vector>
+#include <limits>
+#include <cmath>
+
+const float FLOAT_MIN = -3.40282347e+38F;
 
 void    parseDB()
 {
@@ -17,14 +21,39 @@ void    parseDB()
     std::getline(db, line);
     if (line != "date,exchange_rate")
         throw(std::invalid_argument("Database cannot be modified"));
-    while (std::getline(db, line, ','))
+    while (std::getline(db, line))
     {
+        size_t  comma_pos = line.find(",");
+        if (comma_pos == std::string::npos) 
+            throw (std::invalid_argument("Comma problem in database occured"));
+        std::string date = line.substr(0, comma_pos);
+        std::string val = line.substr(comma_pos + 1);
         
+         tm date_conv;
+
+         if (!strptime(date.c_str(), "%Y-%m-%d", &date_conv))
+             throw(std::invalid_argument("Invalid date format"));
+        char *end;
+        float val_conv = strtod(val.c_str(), &end);
+        if (end == val.c_str() || *end != '\0' || val_conv < FLOAT_MIN
+        || val_conv > std::numeric_limits<float>::max() || std::isnan(val_conv))
+            throw(std::invalid_argument("Invalid value"));
+        data.insert(std::make_pair(date_conv, val_conv));          
     }
- 
 }
 
-std::vector<std::string> split(const std::string& str, char delimiter)
+bool operator<(const tm& one, const tm& two)
 {
+    time_t  one_t = std::mktime(const_cast<tm*> (&one));
+    time_t  two_t = std::mktime(const_cast<tm*> (&two));
 
+    return (one_t < two_t);
+}
+
+bool operator>(const tm& one, const tm& two)
+{
+    time_t  one_t = std::mktime(const_cast<tm*> (&one));
+    time_t  two_t = std::mktime((const_cast<tm*> (&two)));
+
+    return (one_t > two_t);
 }
