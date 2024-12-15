@@ -48,7 +48,6 @@ std::map<tm, float>    parseDB()
             throw(std::invalid_argument("Invalid value"));
         data.insert(std::make_pair(date_conv, val_conv));          
     }
-    printMap(data);
     return (data);
 }
 
@@ -66,4 +65,36 @@ bool operator>(const tm& one, const tm& two)
     time_t  two_t = std::mktime((const_cast<tm*> (&two)));
 
     return (one_t > two_t);
+}
+
+std::map<tm, float> parseInput(std::ifstream& input)
+{
+    std::map<tm, float> indata;
+    if(!input.is_open())
+        throw(std::out_of_range("Input file not valid"));
+    std::string line;
+    std::getline(input, line);
+    if (line != "date | value")
+        throw(std::invalid_argument("Input file should have a header: date | value"));
+    while (std::getline(input, line))
+    {
+        size_t  pipe_pos = line.find("|");
+        if (pipe_pos == std::string::npos) 
+            throw (std::invalid_argument("Input file error: invalid format"));
+        std::string date = line.substr(0, pipe_pos);
+        std::string val = line.substr(pipe_pos + 1);
+        std::cout << date << "->" << val << std::endl;
+        tm date_conv;
+
+        if (!strptime(date.c_str(), "%Y-%m-%d", &date_conv))
+             throw(std::invalid_argument("Invalid date format"));
+        char *end;
+        float val_conv = strtod(val.c_str(), &end);
+        if (end == val.c_str() || *end != '\0' || val_conv < 0.0
+        || val_conv > std::numeric_limits<float>::max() || std::isnan(val_conv))
+            throw(std::invalid_argument("Invalid value"));
+        indata.insert(std::make_pair(date_conv, val_conv));          
+    }
+    printMap(indata);
+    return (indata);
 }
