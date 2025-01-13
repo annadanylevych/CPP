@@ -12,13 +12,12 @@ int main(int argc, char **argv)
         std::map<tm, float> inputMap;
         database = parseDB();
         inputMap = parseInput(input);
-        
-
+        printMap(inputMap);
+        //print_values(inputMap, database);
     }
     catch(const std::exception& e)
     {
         std::cerr << e.what() << '\n';
     }
-    
     return(0);
 }

@@ -2,7 +2,7 @@ NAME = btc
 
 FLAGS = -std=c++98 -Wall -Wextra -Werror
 
-SRCS = main.cpp 
+SRCS = main.cpp BitcoinExchange.cpp
 
 TMP_DIR = tmp/
 
