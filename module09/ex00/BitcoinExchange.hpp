@@ -78,12 +78,11 @@ std::map<tm, float> parseInput(std::ifstream& input)
         throw(std::invalid_argument("Input file should have a header: date | value"));
     while (std::getline(input, line))
     {
-        size_t  pipe_pos = line.find("|");
+        size_t pipe_pos = line.find("|");
         if (pipe_pos == std::string::npos) 
             throw (std::invalid_argument("Input file error: invalid format"));
         std::string date = line.substr(0, pipe_pos);
         std::string val = line.substr(pipe_pos + 1);
-        std::cout << date << "->" << val << std::endl;
         tm date_conv;
 
         if (!strptime(date.c_str(), "%Y-%m-%d", &date_conv))
@@ -95,6 +94,21 @@ std::map<tm, float> parseInput(std::ifstream& input)
             throw(std::invalid_argument("Invalid value"));
         indata.insert(std::make_pair(date_conv, val_conv));          
     }
-    printMap(indata);
     return (indata);
+}
+
+
+void print_values(std::map<tm, float> input, std::map<tm, float> db)
+{
+    for (std::map<tm, float>::iterator it = input.begin(); it != input.end(); ++it){
+        if (db.find(it->first) != db.end()){
+            char buffer[11];
+            strftime(buffer, sizeof(buffer), "%Y-%m-%d", &it->first);
+            std::cout << buffer << " => " << it->second << " = "
+                        << it->second * db.at(it->first) << std::endl;
+        }
+        else {
+            std::map<tm, float>::iterator lower_it = db.lower_bound(it->first)
+        }
+    }
 }
