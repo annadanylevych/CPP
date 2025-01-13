@@ -56,72 +56,73 @@ bool operator>(const tm& one, const tm& two)
     return (one_t > two_t);
 }
 
-std::map<tm, float> parseInput(std::ifstream& input)
+void parseInput(std::ifstream& input, std::map<tm, float> db)
 {
-    std::map<tm, float> indata;
     if(!input.is_open())
         throw(std::out_of_range("Input file not valid"));
     
     std::string line;
-    std::getline(input, line);
-    if (line != "date | value")
-        throw(std::invalid_argument("Input file should have a header: date | value"));
-   
-    while (std::getline(input, line))
-    {
+    bool is_first_line = true;
+
+    while (std::getline(input, line)) {
+        line.erase(0, line.find_first_not_of(" \t"));
+        line.erase(line.find_last_not_of(" \t") + 1);
+
+        if (line.empty())
+            continue;
+
+        if (is_first_line) {
+            is_first_line = false;
+            if (line.find("|") != std::string::npos) {
+                size_t pipe_pos = line.find("|");
+                std::string left = line.substr(0, pipe_pos);
+                std::string right = line.substr(pipe_pos + 1);
+                if (!std::isdigit(left[0]) && !std::isdigit(right[0])) {
+                    continue;
+                }
+            }
+        }
+
         size_t pipe_pos = line.find("|");
         if (pipe_pos == std::string::npos){
-            tm date_conv;
-            std::memset(&date_conv, -1, sizeof(tm));
-            float val_conv = INVALID;
-            indata.insert(std::make_pair(date_conv, val_conv));          
+            std::cout << "Error: bad input => " << line << std::endl;
             continue;
         }
+
         std::string date = line.substr(0, pipe_pos);
         std::string val = line.substr(pipe_pos + 1);
+
         tm date_conv;
         std::memset(&date_conv, 0, sizeof(tm));
-        strptime(date.c_str(), "%Y-%m-%d", &date_conv);
+        if (!strptime(date.c_str(), "%Y-%m-%d", &date_conv)){
+            std::cout << "Error: bad input => " << date << std::endl;
+            continue;
+        }
+    
         char *end;
         float val_conv = strtod(val.c_str(), &end);
-        if (end == val.c_str() || std::isnan(val_conv) || *end != '\0')
-            val_conv = INVALID;
-        else if (val_conv < 0.0)
-            val_conv = NEGATIVE;
-        else if (val_conv > std::numeric_limits<float>::max())
-            val_conv = TOO_LARGE;
-        indata.insert(std::make_pair(date_conv, val_conv));        
-        char buffer[11]; 
-        strftime(buffer, sizeof(buffer), "%Y-%m-%d", &date_conv);
-        std::cout << "Date: " << buffer << ", Rate: " << val_conv << std::endl;
-    }
-    return (indata);
-}
-
-
-void print_values(std::map<tm, float> input, std::map<tm, float> db)
-{
-    tm invalid_date;
-    std::memset(&invalid_date, -1, sizeof(tm));
-    for (std::map<tm, float>::iterator it = input.begin(); it != input.end(); ++it){
-        if (std::memcmp(&it->first, &invalid_date, sizeof(tm)) == 0)
-            std::cout << "Error: invalid date" << std::endl;
-        else if (it->second == NEGATIVE)
-            std::cout << "Error: negative value" << std::endl;
-        else if (it->second == TOO_LARGE)
-            std::cout << "Error: number too big" << std::endl;
-        else if (it->second == INVALID)
+        if (end == val.c_str() || std::isnan(val_conv) || *end != '\0'){
             std::cout << "Error: invalid number" << std::endl;
-        else if (db.find(it->first) != db.end()){
+            continue;
+        }
+        else if (val_conv < 0.0){
+            std::cout << "Error: negative number" << std::endl;
+            continue;
+        }
+        else if (val_conv > 1000){
+            std::cout << "Error: too large a number" << std::endl;
+            continue;
+        }
+        else if (db.find(date_conv) != db.end()){
             char buffer[11];
-            strftime(buffer, sizeof(buffer), "%Y-%m-%d", &it->first);
-            std::cout << buffer << " => " << it->second << " = "
-                        << it->second * db.at(it->first) << std::endl;
+            strftime(buffer, sizeof(buffer), "%Y-%m-%d", &date_conv);
+            std::cout << buffer << " => " << val_conv << " = "
+                        << val_conv * db.at(date_conv) << std::endl;
         }
         else {
             std::map<tm, float>::iterator closest_it = db.end();
             for (std::map<tm, float>::iterator db_it = db.begin(); db_it != db.end(); db_it++){
-                if (db_it->first < it->first){
+                if (db_it->first < date_conv){
                     if (closest_it == db.end() || closest_it->first < db_it->first)
                         closest_it = db_it;
                 }
@@ -129,13 +130,13 @@ void print_values(std::map<tm, float> input, std::map<tm, float> db)
             if (closest_it != db.end())
             {
                 char buffer[11];
-                strftime(buffer, sizeof(buffer), "%Y-%m-%d", &it->first);
-                std::cout << buffer << " => " << it->second << " = "
-                        << it->second * closest_it->second << std::endl;
+                strftime(buffer, sizeof(buffer), "%Y-%m-%d", &date_conv);
+                std::cout << buffer << " => " << val_conv << " = "
+                        << val_conv * closest_it->second << std::endl;
             }
             else {
                 char buffer[11];
-                strftime(buffer, sizeof(buffer), "%Y-%m-%d", &it->first);
+                strftime(buffer, sizeof(buffer), "%Y-%m-%d", &date_conv);
                 std::cerr << "Error: No valid date in database for " << buffer << std::endl;
             }
         }

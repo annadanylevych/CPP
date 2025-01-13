@@ -9,11 +9,8 @@ int main(int argc, char **argv)
     try
     {
         std::map<tm, float> database;
-        std::map<tm, float> inputMap;
         database = parseDB();
-        inputMap = parseInput(input);
-        printMap(inputMap);
-        //print_values(inputMap, database);
+        parseInput(input, database);
     }
     catch(const std::exception& e)
     {
