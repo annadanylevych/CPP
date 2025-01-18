@@ -1,6 +1,6 @@
 #include "RPN.hpp"
 
-std::vector<std::string> parseNumbers(std::string& numbers)
+std::vector<std::string> parseNumbers(std::string numbers)
 {
     std::vector<std::string> parsedNums;
     std::istringstream iss(numbers);
@@ -28,13 +28,18 @@ int calculate(int num1, int num2, char op)
         case '*':
             return(num1 * num2);
         case '/':
+            if (num2 == 0)
+                throw (std::invalid_argument("Error: Division by zero"));
             return(num1 / num2);
+        default:
+            throw (std::invalid_argument("Error: invalid operator"));
    }
 }
 
-void    operate(std::vector<std::string> parsedNums)
+int    operate(std::vector<std::string> parsedNums)
 {
     std::stack<int> rpn;
+
     for (std::vector<std::string>::iterator it = parsedNums.begin(); it != parsedNums.end(); ++it)
     {
         if (std::isdigit((*it)[0]))
@@ -43,12 +48,13 @@ void    operate(std::vector<std::string> parsedNums)
             if (rpn.size() < 2)
                 throw (std::invalid_argument("Error: operation not possible"));
             int num2 = rpn.top();
+            rpn.pop();
             int num1 = rpn.top();
             rpn.pop();
-            rpn.pop();
-            if (num2 == 0 && *it == "/")
-                throw(std::invalid_argument("You cannot divide by 0"));
             rpn.push(calculate(num1, num2, (*it)[0]));
         }
     }
-}  
+    if (rpn.size() != 1)
+        throw (std::invalid_argument("Error: invalid RPN expression"));
+    return (rpn.top());
+}

@@ -9,5 +9,6 @@
 #include <stack>
 #include <sstream>
 
-std::vector<std::string> parseNumbers(std::string& numbers);
-
+std::vector<std::string> parseNumbers(std::string numbers);
+int    operate(std::vector<std::string> parsedNums);
+int calculate(int num1, int num2, char op);
