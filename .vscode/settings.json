@@ -85,6 +85,7 @@
         "typeindex": "cpp",
         "semaphore": "cpp",
         "*.tpp": "cpp",
-        "span": "cpp"
+        "span": "cpp",
+        "__tree": "cpp"
     }
 }
