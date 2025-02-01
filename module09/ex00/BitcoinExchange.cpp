@@ -28,6 +28,7 @@ std::map<tm, float>    parseDB()
         std::string date = line.substr(0, comma_pos);
         std::string val = line.substr(comma_pos + 1);
         tm date_conv;
+        std::memset(&date_conv, 0, sizeof(tm));
         if (!strptime(date.c_str(), "%Y-%m-%d", &date_conv))
              throw(std::invalid_argument("Invalid date format"));
         char *end;
